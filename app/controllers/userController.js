@@ -156,5 +156,33 @@ exports.queryLogin = async (ctx) => {
             msg: "用户名或密码错误"
         }
     }
+};
+
+exports.limitTypeLogin = async (ctx) => {
+    const username = xss(ctx.request.body.username);
+    const password = xss(ctx.request.body.password);
+    const userType = xss(ctx.request.body.userType);
+
+    if (username && password && userType) {
+        var data = await userHelper.queryLogin({username}, {password});
+
+        if (data.length > 0) {
+            ctx.body = {
+                code: 0,
+                msg: "登录成功",
+                data
+            };
+        } else {
+            ctx.body = {
+                code: 500,
+                msg: "用户名或密码错误"
+            }
+        }
+    } else {
+        ctx.body = {
+            code: 500,
+            msg: "缺少关键参数"
+        }
+    }
 
 };

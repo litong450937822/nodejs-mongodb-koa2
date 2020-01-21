@@ -1,10 +1,10 @@
 'use strict';
 
 let mongoose = require('mongoose');
-let entBaseInfo = mongoose.model('EntBaseInfo');
+let BankBaseInfo = mongoose.model('BankBaseInfo');
 
 exports.findByUserId = async (userId) => {
-    let query = entBaseInfo.find({'userId':userId});
+    let query = BankBaseInfo.find({'userId':userId});
     let res = null;
     await query.exec(function (err, bean) {
         if (err) {
@@ -18,7 +18,7 @@ exports.findByUserId = async (userId) => {
 };
 
 exports.findAll = async () => {
-    let query = entBaseInfo.find({});
+    let query = BankBaseInfo.find({});
     let res = null;
     await query.exec(function (err, bean) {
         if (err) {

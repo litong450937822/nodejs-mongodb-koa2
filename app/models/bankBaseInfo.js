@@ -10,31 +10,10 @@ var Schema = mongoose.Schema;
  * 除了定义结构外，还定义文档的实例方法，静态模型方法，复合索引，中间件等
  * @type {mongoose}
  */
-var UserSchema = new Schema({
-    username: {
-        unique: true,
-        type: String
-    },
-    password: String,
-    phoneNumber: {
-        unique: true,
-        type: String
-    },
-    areaCode: String,
-    verifyCode: String,
-    verified: {
-        type: Boolean,
-        default: false
-    },
-    accessToken: String,
-    nickname: String,
-    gender: String,
-    breed: String,
-    age: String,
-    avatar: String,
-    userType: {
-        type: String,
-        default: "0"
+var BankBaseInfoSchema = new Schema({
+    userId: {
+        type: Object,
+        unique: true
     },
     meta: {
         createTime: {
@@ -49,7 +28,7 @@ var UserSchema = new Schema({
 })
 
 // Defines a pre hook for the document.
-UserSchema.pre('save', function (next) {
+BankBaseInfoSchema.pre('save', function (next) {
     if (this.isNew) {
         this.meta.createTime = this.meta.updateTime = Date.now()
     } else {
@@ -65,9 +44,9 @@ UserSchema.pre('save', function (next) {
  * @type {[type]}
  */
 // 参数User 数据库中的集合名称, 不存在会创建.
-var User = mongoose.model('User', UserSchema)
+var BankBaseInfo = mongoose.model('BankBaseInfo', BankBaseInfoSchema)
 
-module.exports = User
+module.exports = BankBaseInfo;
 
 /**
  * nodejs中文社区这篇帖子对mongoose的用法总结的不错：https://cnodejs.org/topic/548e54d157fd3ae46b233502

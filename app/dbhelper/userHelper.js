@@ -91,3 +91,26 @@ exports.queryLogin = async ({username}, {password}) => {
 	})
 	return res;
 };
+
+exports.limitTypeLogin = async ({username}, {password}, {userType}) => {
+	var query = User.find(
+		{
+			$and: [
+				{username},
+				{password},
+				{userType}
+			]
+		},
+		{
+			password:0
+		});
+	var res = null
+	await query.exec(function(err, user) {
+		if(err) {
+			res = {}
+		}else {
+			res = user
+		}
+	})
+	return res;
+};

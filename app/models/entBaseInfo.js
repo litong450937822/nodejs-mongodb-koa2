@@ -4,7 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var entBaseInfoSchema = new Schema({
-    userId: Object,
+    userId: {
+        type: Object,
+        unique: true
+    },
     companyName: String,
     creditCode: String,
     creditDate: Date,

@@ -31,5 +31,9 @@
     "speakeasy": "^2.0.0",
     "uuid": "^3.0.1",
     "xss": "^0.3.3"
+  },
+  "apidoc": {
+    "title": "接口文档",
+    "url": "http://localhost:7777"
   }
 }
